@@ -296,7 +296,9 @@ public class Prospector : MonoBehaviour {
 
                 UpdateDrawPile();     // Restacks the drawPile
 
-                SetTableauFaces(); // ?????
+                //SetTableauFaces(); // ?????
+
+                ScoreManager.EVENT(eScoreEvent.draw);
 
                 break;
 
@@ -338,9 +340,13 @@ public class Prospector : MonoBehaviour {
 
                 SetTableauFaces();
 
+                ScoreManager.EVENT(eScoreEvent.mine);
+
                 break;
 
         }
+
+        //SetTableauFaces(); ???
 
         CheckForGameOver();
     }
@@ -348,8 +354,8 @@ public class Prospector : MonoBehaviour {
     void CheckForGameOver()
     {
 
-        Debug.Log(tableau.Count);
-        Debug.Log("GameOver Check");
+        //Debug.Log(tableau.Count);
+        //Debug.Log("GameOver Check");
 
         if (tableau.Count == 0)
         {
@@ -370,7 +376,7 @@ public class Prospector : MonoBehaviour {
         if (drawPile.Count > 0)
         {
 
-            Debug.Log("Draw Count Greater Than Zero");
+            //Debug.Log("Draw Count Greater Than Zero");
             return;
 
         }
@@ -382,7 +388,7 @@ public class Prospector : MonoBehaviour {
 
         foreach (CardProspector cd in tableau)
         {
-            Debug.Log("Remaining Valid Play?");
+            //Debug.Log("Remaining Valid Play?");
 
             if (AdjacentRank(cd, target))
             {
@@ -410,10 +416,12 @@ public class Prospector : MonoBehaviour {
         if (won)
         {
             print("Game Over. You won! :)");
+            ScoreManager.EVENT(eScoreEvent.gameWin);
         }
         else
         {
             print("Game Over. You Lost. :(");
+            ScoreManager.EVENT(eScoreEvent.gameLoss);
         }
 
         // Reload the scene, resetting the game
