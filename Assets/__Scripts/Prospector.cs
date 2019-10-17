@@ -116,6 +116,19 @@ public class Prospector : MonoBehaviour {
 		deck = GetComponent<Deck> ();
 		deck.InitDeck (deckXML.text);
 
+        Deck.Shuffle(ref deck.cards); // This shuffles the deck by reference // a
+
+        Card c;
+
+        for (int cNum = 0; cNum < deck.cards.Count; cNum++)
+        {                    // b
+
+            c = deck.cards[cNum];
+
+            c.transform.localPosition = new Vector3((cNum % 13) * 3, cNum / 13 * 4, 0);
+
+        }
+
         layout = GetComponent<Layout>();
         layout.ReadLayout(layoutXML.text);
 

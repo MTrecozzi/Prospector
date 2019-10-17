@@ -36,8 +36,10 @@ public class Deck : MonoBehaviour {
 	public Dictionary<string, Sprite>	dictSuits;
 
 
-	// called by Prospector when it is ready
-	public void InitDeck(string deckXMLText) {
+
+
+    // called by Prospector when it is ready
+    public void InitDeck(string deckXMLText) {
 		// from page 576
 		if( GameObject.Find("_Deck") == null) {
 			GameObject anchorGO = new GameObject("_Deck");
