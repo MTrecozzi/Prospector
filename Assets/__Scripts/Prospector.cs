@@ -276,6 +276,8 @@ public class Prospector : MonoBehaviour {
         switch (cd.state)
         {
 
+
+
             case eCardState.target:
 
                 // Clicking the target card does nothing
@@ -293,6 +295,8 @@ public class Prospector : MonoBehaviour {
                 MoveToTarget(Draw());  // Moves the next drawn card to the target
 
                 UpdateDrawPile();     // Restacks the drawPile
+
+                SetTableauFaces(); // ?????
 
                 break;
 
@@ -337,6 +341,83 @@ public class Prospector : MonoBehaviour {
                 break;
 
         }
+
+        CheckForGameOver();
+    }
+
+    void CheckForGameOver()
+    {
+
+        Debug.Log(tableau.Count);
+        Debug.Log("GameOver Check");
+
+        if (tableau.Count == 0)
+        {
+
+            // Call GameOver() with a win
+
+            GameOver(true);
+
+            return;
+
+        }
+
+
+
+
+        // If there are still cards in the draw pile, the game's not over
+
+        if (drawPile.Count > 0)
+        {
+
+            Debug.Log("Draw Count Greater Than Zero");
+            return;
+
+        }
+
+
+
+
+        // Check for remaining valid plays
+
+        foreach (CardProspector cd in tableau)
+        {
+            Debug.Log("Remaining Valid Play?");
+
+            if (AdjacentRank(cd, target))
+            {
+
+                // If there is a valid play, the game's not over
+
+                return;
+
+            }
+
+        }
+
+
+
+
+        // Since there are no valid plays, the game is over
+
+        // Call GameOver with a loss
+
+        GameOver(false);
+    }
+
+    void GameOver(bool won)
+    {
+        if (won)
+        {
+            print("Game Over. You won! :)");
+        }
+        else
+        {
+            print("Game Over. You Lost. :(");
+        }
+
+        // Reload the scene, resetting the game
+        SceneManager.LoadScene("__Prospector_Scene_0");
     }
 
     public bool AdjacentRank(CardProspector c0, CardProspector c1)
