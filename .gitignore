@@ -19,3 +19,7 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+*.lock
+.vs/Prospector/v15/Server/sqlite3/storage.ide
+.vs/Prospector/v15/Server/sqlite3/storage.ide-shm
+.vs/Prospector/v15/Server/sqlite3/storage.ide-wal
